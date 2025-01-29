@@ -1,16 +1,16 @@
 
 # Create a Vault
 resource "oci_kms_vault" "ft_vault" {
-  compartment_id = var.compartment_ocid
+  compartment_id = var.compartment_id
   display_name   = var.vault_display_name
   vault_type     = "DEFAULT"
 }
 
 # Create a Key for encryption
 resource "oci_kms_key" "ft_key" {
-  compartment_id = var.compartment_ocid
-  display_name   = "db-key"
-  vault_id       = oci_kms_vault.db_vault.id
+  compartment_id      = var.compartment_id
+  display_name        = "dbkey"
+  management_endpoint = oci_kms_vault.ft_vault.management_endpoint
   key_shape {
     algorithm = "AES"
     length    = 32
@@ -24,8 +24,8 @@ resource "random_password" "db_password" {
 }
 
 # Store the password as a Vault Secret
-resource "oci_secrets_secret" "ft_secret" {
-  compartment_id = var.compartment_ocid
+resource "oci_vault_secret" "ft_secret" {
+  compartment_id = var.compartment_id
   vault_id       = oci_kms_vault.ft_vault.id
   key_id         = oci_kms_key.ft_key.id
   secret_name    = "AutonomousJson"

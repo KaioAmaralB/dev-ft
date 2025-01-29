@@ -1,6 +1,7 @@
 ## Copyright (c) 2021, Oracle and/or its affiliates.
 ## All rights reserved. The Universal Permissive License (UPL), Version 1.0 as shown at http://oss.oracle.com/licenses/upl
 
+
 variable "tenancy_ocid" {}
 variable "region" {}
 variable "compartment_id" {}
@@ -47,7 +48,7 @@ variable "container_repository_display_name" {
   description = "Nome do repositório de container"
 }
 
-variable "application_display_name"{
+variable "application_display_name" {
   default = "functionworkshop"
 }
 
@@ -55,14 +56,15 @@ variable "queue_display_name" {
   default = "FT-Queue"
 }
 
-variable "mysql_db_system_admin_username" {
-  default = "devopsft"
-}
-
-variable "mysql_shape_name" {
-  default = "MySQL.2"
-}
 
 variable "vault_display_name" {
   default = "FT-Vault"
+}
+
+variable "cluster_endpoint_visibility" {
+  default = "Public"
+}
+
+variable "cluster_workers_visibility" {
+  default = "Private"
 }

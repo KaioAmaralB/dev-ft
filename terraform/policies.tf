@@ -6,48 +6,11 @@ resource "oci_identity_dynamic_group" "oke_nodes_dg" {
   name           = "${local.app_name_normalized}-oke-cluster-dg-${random_string.deploy_id.result}"
   description    = "${var.app_name} Cluster Dynamic Group"
   compartment_id = var.tenancy_ocid
-  matching_rule  = "ANY {ALL {instance.compartment.id = '${local.oke_compartment_id}'},ALL {resource.type = 'cluster', resource.compartment.id = '${local.oke_compartment_id}'}, ALL {resource.type = 'devopsbuildpipeline', resource.compartment.id = '${local.oke_compartment_id}'}}"
+  matching_rule  = "ANY {ALL {instance.compartment.id = '${var.compartment_id}'},ALL {resource.type = 'cluster', resource.compartment.id = '${var.compartment_id}'}, ALL {resource.type = 'devopsbuildpipeline', resource.compartment.id = '${var.compartment_id}'}}"
 
   provider = oci.home_region
 
   count = var.create_dynamic_group_for_nodes_in_compartment ? 1 : 0
-}
-resource "oci_identity_policy" "oke_compartment_policies" {
-  name           = "${local.app_name_normalized}-oke-cluster-compartment-policies-${random_string.deploy_id.result}"
-  description    = "${var.app_name} OKE Cluster Compartment Policies"
-  compartment_id = local.oke_compartment_id
-  statements     = local.oke_compartment_statements
-
-  depends_on = [oci_identity_dynamic_group.oke_nodes_dg]
-
-  provider = oci.home_region
-
-  count = var.create_compartment_policies ? 1 : 0
-}
-resource "oci_identity_policy" "kms_compartment_policies" {
-  name           = "${local.app_name_normalized}-kms-compartment-policies-${random_string.deploy_id.result}"
-  description    = "${var.app_name} KMS Compartment Policies"
-  compartment_id = local.oke_compartment_id
-  statements     = local.kms_compartment_statements
-
-  depends_on = [oci_identity_dynamic_group.oke_nodes_dg]
-
-  provider = oci.home_region
-
-  count = (var.create_compartment_policies) ? 1 : 0
-}
-
-resource "oci_identity_policy" "oke_tenancy_policies" {
-  name           = "${local.app_name_normalized}-oke-cluster-tenancy-policies-${random_string.deploy_id.result}"
-  description    = "${var.app_name} Dev Tenancy Policies"
-  compartment_id = var.tenancy_ocid
-  statements     = local.dev_tenancy_statements
-
-  depends_on = [oci_identity_dynamic_group.oke_nodes_dg]
-
-  provider = oci.home_region
-
-  count = var.create_tenancy_policies ? 1 : 0
 }
 
 locals {
@@ -67,17 +30,17 @@ locals {
     "Allow dynamic-group ${local.oke_nodes_dg} to read log-content in compartment id ${var.compartment_id}"
   ]
   # cluster_autoscaler_statements = [
-  #   "Allow dynamic-group ${local.oke_nodes_dg} to manage cluster-node-pools in compartment id ${local.oke_compartment_id}",
-  #   "Allow dynamic-group ${local.oke_nodes_dg} to manage instance-family in compartment id ${local.oke_compartment_id}",
-  #   "Allow dynamic-group ${local.oke_nodes_dg} to use subnets in compartment id ${local.oke_compartment_id}",
-  #   "Allow dynamic-group ${local.oke_nodes_dg} to read virtual-network-family in compartment id ${local.oke_compartment_id}",
-  #   "Allow dynamic-group ${local.oke_nodes_dg} to use vnics in compartment id ${local.oke_compartment_id}",
-  #   "Allow dynamic-group ${local.oke_nodes_dg} to inspect compartments in compartment id ${local.oke_compartment_id}"
+  #   "Allow dynamic-group ${local.oke_nodes_dg} to manage cluster-node-pools in compartment id ${var.compartment_id}",
+  #   "Allow dynamic-group ${local.oke_nodes_dg} to manage instance-family in compartment id ${var.compartment_id}",
+  #   "Allow dynamic-group ${local.oke_nodes_dg} to use subnets in compartment id ${var.compartment_id}",
+  #   "Allow dynamic-group ${local.oke_nodes_dg} to read virtual-network-family in compartment id ${var.compartment_id}",
+  #   "Allow dynamic-group ${local.oke_nodes_dg} to use vnics in compartment id ${var.compartment_id}",
+  #   "Allow dynamic-group ${local.oke_nodes_dg} to inspect compartments in compartment id ${var.compartment_id}"
   # ]
   allow_oke_use_oci_vault_keys_statements = [
     "Allow service oke to use vaults in compartment id ${var.compartment_id}",
     "Allow service oke to use keys in compartment id ${var.compartment_id} where target.key.id = '${local.oci_vault_key_id}'",
     "Allow dynamic-group ${local.oke_nodes_dg} to use keys in compartment id ${var.compartment_id} where target.key.id = '${local.oci_vault_key_id}'"
   ]
-  
+
 }

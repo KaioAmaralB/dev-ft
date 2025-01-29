@@ -395,13 +395,6 @@ variables:
     #default: "PUBLIC"
     visible: false
 
-  apm_diplay_name:
-    type: string
-    title: "Nome do APM"
-    #description: "Nome do APM a ser criado"
-    #default: "APM FT"
-    required: true
-
 # Repository
 
   repository_is_immutable:
