@@ -22,7 +22,7 @@ resource "oci_identity_policy" "devops_compartment_policies" {
 
   provider = oci.home_region
 
-  count = var.create_compartment_policies ? 1 : 0
+  #count = var.create_compartment_policies ? 1 : 0
 }
 
 resource "oci_identity_policy" "devops_root_policies" {
@@ -35,7 +35,7 @@ resource "oci_identity_policy" "devops_root_policies" {
 
   provider = oci.home_region
 
-  count = var.create_compartment_policies ? 1 : 0
+  #count = var.create_compartment_policies ? 1 : 0
 }
 
 locals {

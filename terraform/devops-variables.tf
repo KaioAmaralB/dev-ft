@@ -10,7 +10,7 @@ variable "notification_topic_name" {
 }
 
 variable "project_description" {
-  default = "DevOps Project for OKE deployment"
+  default = "DevOps Project for OKE and Functions deployment"
 }
 
 variable "environment_display_name" {
