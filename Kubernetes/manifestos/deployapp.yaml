@@ -1,0 +1,21 @@
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: queue-reader
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: queue-reader
+  template:
+    metadata:
+      labels:
+        app: queue-reader
+    spec:
+      containers:
+        - name: queue-reader
+          image: pedrochristo/msg_reader_json:latest
+          envFrom:
+            - configMapRef:
+                name: reader-configmap

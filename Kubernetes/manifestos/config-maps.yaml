@@ -1,0 +1,11 @@
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: reader-configmap
+data:
+  SERVICE_ENDPOINT: [Queue Service Endpoint]
+  QUEUE_ID : [QUEUE ID]
+  SECRET_ID: [Secret ID]
+  AUTONOMOUS: [ADB Identify]
+  USER: [USER]
