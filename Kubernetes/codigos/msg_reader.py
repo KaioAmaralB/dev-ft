@@ -41,7 +41,7 @@ def get_text_secret(secret_ocid):
     return decrypted_secret_content
 
 def mongo_client(user, password, db):
-    mongoString = f"mongodb://{user}:{password}@{db}-JSON.adb.sa-santiago-1.oraclecloudapps.com:27017/{user}?authMechanism=PLAIN&authSource=$external&ssl=true&retryWrites=false&loadBalanced=true"
+    mongoString = f"mongodb://{user}:{password}@{db}:27017/{user}?authMechanism=PLAIN&authSource=$external&ssl=true&retryWrites=false&loadBalanced=true"
     client = MongoClient(mongoString, maxPoolSize=50)
     return client
 
