@@ -21,6 +21,7 @@ resource "oci_kms_key" "ft_key" {
 resource "random_password" "db_password" {
   length  = 16
   special = true
+  numeric = true
 }
 
 # Store the password as a Vault Secret

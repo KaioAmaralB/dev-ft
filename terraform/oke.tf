@@ -8,8 +8,16 @@ module "oke" {
 
   providers = { oci.home = oci.home }
 
+  region = var.region
+
   #   # general oci parameters
   compartment_id = var.compartment_id
+
+  create_vcn           = true
+  create_drg           = false
+  create_bastion       = false
+  create_iam_resources = false
+  create_operator      = false
 
   #   #Kubernetes
 
@@ -38,21 +46,17 @@ module "oke" {
 
   }
 
-  create_vcn = false
-  vcn_id     = oci_core_virtual_network.oke_vcn.id
+  load_balancers              = "public"
+  control_plane_is_public     = true
+  control_plane_allowed_cidrs = ["0.0.0.0/0"]
+
   subnets = {
-    cp = {
-      id     = oci_core_subnet.oke_k8s_endpoint_subnet.id,
-      create = "never"
-    }
-    pub_lb = {
-      id     = oci_core_subnet.oke_lb_subnet.id,
-      create = "never"
-    }
-    workers = {
-      id     = oci_core_subnet.oke_nodes_subnet.id,
-      create = "never"
-    }
+    cp      = { newbits = 13 }
+    int_lb  = { newbits = 11 }
+    pub_lb  = { newbits = 11 }
+    workers = { newbits = 2 }
+    pods    = { newbits = 2 }
   }
+
 
 }

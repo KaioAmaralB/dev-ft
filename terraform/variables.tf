@@ -47,7 +47,7 @@ variable "container_repository_display_name" {
   description = "Nome do repositório de container"
 }
 
-variable "application_display_name"{
+variable "application_display_name" {
   default = "functionworkshop"
 }
 
@@ -55,20 +55,6 @@ variable "queue_display_name" {
   default = "FT-Queue"
 }
 
-variable "mysql_db_system_admin_username" {
-  default = "devopsft"
-}
-
-variable "mysql_shape_name" {
-  default = "MySQL.2"
-}
-
 variable "vault_display_name" {
   default = "FT-Vault"
-}
-
-variable "create_compartment_policies" {
-  description = "Flag para controlar a criação de políticas no compartment"
-  type        = bool
-  default     = false
 }

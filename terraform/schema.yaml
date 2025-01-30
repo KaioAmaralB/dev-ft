@@ -75,6 +75,7 @@ variableGroups:
     - node_pool_node_shape_config_ocpus
     - node_pool_node_shape_config_memory_in_gbs
     - node_pool_name
+    - k8s_version
 
 - title: "API Gateway"
   visible: true
@@ -99,6 +100,11 @@ variableGroups:
   visible: true
   variables:
     - queue_display_name
+
+- title: "Vault"
+  visible: true
+  variables:
+    - vault_display_name
 
 #################
 # Output Groups
@@ -256,6 +262,10 @@ variables:
   ####################  
   ## OKE 
   ####################
+  
+  k8s_version:
+    type: string
+    visible: false
 
   num_pool_workers:
     type: integer
@@ -328,16 +338,13 @@ variables:
     enum:
       - "Oracle Linux"
     required: true
-    visible:
-      and:
-        - create_new_oke_cluster
-        - show_advanced
+    visible: false
 
   image_operating_system_version:
     type: string
     required: true
     title: "Image OS Version"
-    visible: true
+    visible: false
   
   create_dynamic_group_for_nodes_in_compartment:
     type: boolean
@@ -432,4 +439,10 @@ variables:
   queue_display_name:
     type: string
     title: "Queue Name"
+    required: true
+
+# vault
+  vault_display_name:
+    type: string
+    title: "Vault Name"
     required: true

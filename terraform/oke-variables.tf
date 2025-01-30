@@ -49,22 +49,6 @@ variable "image_operating_system_version" {
   description = "The OS/image version installed on all nodes in the node pool."
 }
 
-# Network Details
-## CIDRs
-variable "network_cidrs" {
-  type = map(string)
-
-  default = {
-    VCN-CIDR                      = "10.20.0.0/16"
-    SUBNET-REGIONAL-CIDR          = "10.20.10.0/24"
-    LB-SUBNET-REGIONAL-CIDR       = "10.20.20.0/24"
-    ENDPOINT-SUBNET-REGIONAL-CIDR = "10.20.0.0/28"
-    ALL-CIDR                      = "0.0.0.0/0"
-    PODS-CIDR                     = "10.244.0.0/16"
-    KUBERNETES-SERVICE-CIDR       = "10.96.0.0/16"
-  }
-}
-
 
 # Create Dynamic Group and Policies
 variable "create_dynamic_group_for_nodes_in_compartment" {
@@ -87,12 +71,6 @@ variable "create_tenancy_policies" {
 # ORM Schema visual control variables
 variable "show_advanced" {
   default = false
-}
-
-# App Name Locals
-locals {
-  app_name_normalized = substr(replace(lower(var.app_name), " ", "-"), 0, 6)
-  app_name_for_db     = regex("[[:alnum:]]{1,10}", var.app_name)
 }
 
 # Dictionary Locals

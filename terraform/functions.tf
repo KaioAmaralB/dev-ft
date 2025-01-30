@@ -1,6 +1,6 @@
 resource "oci_functions_application" "new_application" {
-    compartment_id = var.compartment_id
-    display_name = var.application_display_name
-    #subnet_ids = [oci_core_subnet.oke_lb_subnet[0].id]
-    subnet_ids = ["ocid1.subnet.oc1.sa-saopaulo-1.aaaaaaaahsh6lpnkdh55sjauns35hrj4oagn5d6iajyxerpyewdyahfuzaka"]
+  compartment_id             = var.compartment_id
+  display_name               = var.application_display_name
+  subnet_ids                 = [module.oke.pub_lb_subnet_id]
+  network_security_group_ids = [module.oke.pub_lb_nsg_id, oci_core_network_security_group.app_network_security_group.id]
 }
