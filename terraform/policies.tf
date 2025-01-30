@@ -13,11 +13,10 @@ resource "oci_identity_dynamic_group" "oke_nodes_dg" {
 }
 
 resource "oci_identity_policy" "test_policy" {
-  #Required
-  compartment_id = var.tenancy_ocid
+  compartment_id = var.compartment_id
   description    = local.policy_description
   name           = "${local.app_name_normalized}-devops-policy"
-  statements     = concat(local.oci_statements)
+  statements     = local.oke-policies
   depends_on     = [oci_identity_dynamic_group.oke_nodes_dg]
 
   provider = oci.home_region
@@ -26,6 +25,8 @@ resource "oci_identity_policy" "test_policy" {
 locals {
 
   oke_nodes_dg = oci_identity_dynamic_group.oke_nodes_dg.name
+
+  oke-policies = concat(local.oci_statements)
 
   dynamic_group_rules = [
     "ANY {",
@@ -37,10 +38,14 @@ locals {
   oci_statements = [
     "Allow dynamic-group ${local.oke_nodes_dg} to use functions-family in compartment id '${var.compartment_id}'",
     "Allow dynamic-group ${local.oke_nodes_dg} to use queues in compartment id '${var.compartment_id}'",
-    "Allow service vulnerability-scanning-service to read repos in tenancy",
-    "Allow service vulnerability-scanning-service to read compartments in tenancy"
   ]
 
   policy_description = "Policy for the devops enviroment"
+}
+
+output "policies" {
+
+  value = local.oke-policies
+
 }
 
