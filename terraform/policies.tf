@@ -36,8 +36,8 @@ locals {
     "}"
   ]
   oci_statements = [
-    "Allow dynamic-group ${local.oke_nodes_dg} to use functions-family in compartment id '${var.compartment_id}'",
-    "Allow dynamic-group ${local.oke_nodes_dg} to use queues in compartment id '${var.compartment_id}'",
+    "Allow dynamic-group ${local.oke_nodes_dg} to use functions-family in compartment id ${var.compartment_id}",
+    "Allow dynamic-group ${local.oke_nodes_dg} to use queues in compartment id ${var.compartment_id}",
   ]
 
   policy_description = "Policy for the devops enviroment"
