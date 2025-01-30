@@ -9,7 +9,7 @@
 
 O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço do OCI chamado **Resource Manager**.
 
-1. Faça o download do código em zip [aqui](/releases/download/latest/terraform.zip)
+1. Faça o download do código em zip [aqui](https://github.com/ChristoPedro/dev-ft/releases/download/v0.1/terraform.zip)
 2. Na console do OCI navegue no menu inicial em **Developer Services -> Resource Manager -> Stacks**
 3. Clique em **Create New Stack**
 4. Selecion o Arquivo ZIP que foi baixado anteriormente
