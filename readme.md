@@ -2,8 +2,9 @@
 
 - [DevOps FastTrack - Labs](#devops-fasttrack---labs)
   - [Deploy do Ambiente](#deploy-do-ambiente)
-  - [Lab1 - Functions, Api Gateway e Queue](#lab1---functions-api-gateway-e-queue)
-  - [Lab2 - Kubernetes](#lab2---kubernetes)
+  - [Lab1 - OCI DevOps](#lab1---oci-devops)
+  - [Lab2 - Functions, Api Gateway e Queue](#lab2---functions-api-gateway-e-queue)
+  - [Lab3 - Kubernetes](#lab3---kubernetes)
     - [Configurar acesso do Cluster no Cloud Shell](#configurar-acesso-do-cluster-no-cloud-shell)
     - [Buscar informações de Serviços necessários](#buscar-informações-de-serviços-necessários)
     - [Configurar os manifestos e fazer apply no cluster](#configurar-os-manifestos-e-fazer-apply-no-cluster)
@@ -21,9 +22,78 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 7. **Marcar o Checkbox Run apply**
 8. Clicar em create
 
-## Lab1 - Functions, Api Gateway e Queue
+## Lab1 - OCI DevOps
 
-## Lab2 - Kubernetes
+1. Após a criação do projeto feito pelo **Resource Manager**, vamos começara criar a nossa esteira. Vamos em **Developer Services** 
+2. Depois em  **Projects** 
+![](/images/devops-project.png)
+  
+1. Ao entrar no nosso projeto da esteira vamos em **Code Repositories** 
+   
+2. Nessa parte podemos fazer um Mirror de um repo existente, ou podemos criar um do zero. Para facilitar o nosso LAB vamos criar um repositorio no **OCI DevOps** e vamos fazer o git clone então vamos criar o nosso repositorio indo no **Create Repository** e entrando com o nome no **Repository Name**
+
+
+5. Vamos gerar o  **Token de Autenticação** para conseguirmos fazer o git clone e depois o push do código para o reposotorio:
+   1.  Na console no lado direito clique no ícone do boneco e depois vai no nome do seu profile
+   ![](/images/user01.png)
+   2.  Dentro do seu profile vai em **Auth Tokens** e depois em **Generate token** essa será seu password para se autenticar no repositorio criado
+ ![](/images/user02.png)
+
+1.  Após gerado o token vamos voltar ao **OCI DevOps** ir em **Code Repositories** entrar no repo que criamos no  _passo 4_ ir em **Details** e descendo a tela ir em **HTTPS** 
+   
+2.  Após isso em uma nova abra abra o **Code Editor** 
+![](/images/code-editor.png)
+  Lá no final vamos ter um comando do git clone, copie esse comando e vá até ao **Code Editor**, é um comando que começa assim
+      ```bash
+    git clone https://devops.....
+    ```
+ 
+1.  Após isso em uma nova abra abra o  **Code Editor** 
+![](/images/code-editor.png)
+1. E copie o comando no terminal
+  ![](/images/terminal.png)
+
+1.  Após isso, ele vai pedir o username e password, na tabela abaixo mostra qual será o seu username e password (token criado no _passo 5_)
+
+
+<table>
+  <tr>
+    <td>username</td>
+    <td>TenancyName/YourUserName</td>
+  </tr>
+  <tr>
+    <td>password</td>
+    <td>token</td>
+  </tr>
+</table>
+
+11. Depois de feito o git clone de maneira correta vamos fazer o upload do arquivo, mas primeiramente vamos fazer o download do mesmo nesse link: https://github.com/ChristoPedro/dev-ft/archive/refs/tags/v0.1.zip
+12.  Vá em **File** e depois em **Upload Files** e faço o upload do arquivo que fez o download **dev-ft-0.1.zip**
+![](/images/code-editor02.png)
+
+
+ Rode o seguinte comando para fazer o unzip
+  ```bash
+    unzip dev-ft-0.1.zip -d DIRETORIO REPO
+  ```
+
+![](/images/unzip.png)
+
+13. Depois vamos fazer os seguintes comandos para fazer o push para o repositorio
+  ```bash
+    cd DIRETORIO_CRIADO_REPO
+    git config --global user.email "EMAIL DO SEU USUARIO"
+    git add .
+    git commit -m "novo commit"
+    git push
+  ```
+14. Repo irá ficar assim: 
+    ![](/images/devops-repo.png)
+
+
+## Lab2 - Functions, Api Gateway e Queue
+
+## Lab3 - Kubernetes
 
 ### Configurar acesso do Cluster no Cloud Shell
 

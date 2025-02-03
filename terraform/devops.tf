@@ -1,7 +1,7 @@
 resource "oci_logging_log_group" "test_log_group" {
   compartment_id = var.compartment_id
   display_name   = "${local.app_name_normalized}_${random_string.deploy_id.result}_log_group"
-  #defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
+  defined_tags   = { "${oci_identity_tag_namespace.ArchitectureCenterTagNamespace.name}.${oci_identity_tag.ArchitectureCenterTag.name}" = var.release }
 }
 
 resource "oci_logging_log" "test_log" {
