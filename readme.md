@@ -15,12 +15,16 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 
 1. Faça o download do código em zip [aqui](https://github.com/ChristoPedro/dev-ft/releases/download/v0.1/terraform.zip)
 2. Na console do OCI navegue no menu hamburger em **Developer Services -> Resource Manager -> Stacks**
+![Resource Manager](/images/resource-manager-menu.png)
 3. Clique em **Create New Stack**
 4. Selecion o Arquivo ZIP que foi baixado anteriormente
+![Stack](/images/stack-1.png)
 5. Confira se o Terraform está na versão **1.5**
 6. Na próxima tela selecione o compartment correto e clicar em Next
+ ![Stack 2](/images/stack-2.png)
 7. **Marcar o Checkbox Run apply**
 8. Clicar em create
+   ![Apply](/images/apply.png)
 
 ## Lab1 - OCI DevOps
 
@@ -121,7 +125,6 @@ NAME          STATUS   ROLES   AGE     VERSION
 1. **Autonomous Json**, navegue no menu hamburger **Oracle Database > Autonomous JSON Database**
    
 2. Selecione o banco criado pelo Resource Manager vá em **Tool Configuration** e copie o string do banco de dados como na figura abaixo.
-
 ![String banco de dados](/images/autonomous-string.png)
 
 3. **Queue**, navegue no menu hamburger **Developer Services -> Queue**
