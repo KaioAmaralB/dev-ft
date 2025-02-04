@@ -98,14 +98,24 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 ### Configurar acesso do Cluster no Cloud Shell
 
 1. Na console do OCI navegue no menu hamburger em **Developer Services -> Kubernetes Cluter(OKE)**
+![Menu OKE](/images/oke-menu.png)
 2. Confira o compartment, se está no correto escolhido no Resouce Manager
-3. Clique no cluster e selecione **Access Cluster**
+3. Clique no cluster criado no resource manager e selecione **Access Cluster**
+![Acess Cluster](/images/oke-acess.png)
 4. Siga o Passo-a-Passo do Pop-up
+![Tutorial](/images/oke-acess-2.png)
 5. Para testar o acesso o cluster, executar o código abaixo.
 
 ```bash
 kubectl get nodes
 ```
+
+```bash
+$ kubectl get nodes
+NAME          STATUS   ROLES   AGE     VERSION
+10.0.254.86   Ready    node    1h      v1.31.1
+```
+
 ### Buscar informações de Serviços necessários
 
 1. **Autonomous Json**, navegue no menu hamburger **Oracle Database > Autonomous JSON Database**
@@ -115,13 +125,17 @@ kubectl get nodes
 ![String banco de dados](/images/autonomous-string.png)
 
 3. **Queue**, navegue no menu hamburger **Developer Services -> Queue**
+![Queue Menu](/images/queue-menu.png)
 4. No menu do lado esquerdo clique em Queues
 5. Clique na Queue criado via Resource Manager
 6. Copie da Conole o OCID da Fila e o Endpoint
+![Queue Info](/images/queue-info.png)
 7. **Scret**, navegue no menu hamburger **Identity and Security -> Vault**
+![Vault Manu](/images/vault-menu.png)
 8. Clique no vault criado pelo Resource Manager
-9. No lado esquerdo selecione Secrets
+9.  No lado esquerdo selecione Secrets
 10. Copie o OCID do Secret criado pelo Resource Manager
+![Secret Info](/images/secret-info.png)
 
 ### Configurar os manifestos e fazer apply no cluster
 
