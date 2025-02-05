@@ -49,22 +49,23 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 
 
 6.  Após gerado o token vamos voltar ao **OCI DevOps** ir em **Code Repositories** entrar no repo que criamos no  _passo 4_ ir em **Details** e descendo a tela ir em **HTTPS** 
-7.  até ao **Code Editor**, é um comando que começa assim
+
+  Lá no final vamos ter um comando do git clone, copie esse comando e vá até ao **Code Editor**, é um comando que começa assim
       ```bash
     git clone https://devops.....
     ```
    
-8.  Após isso em uma nova abra abra o **Code Editor** 
+7.  Após isso em uma nova abra abra o **Code Editor** 
 ![](/images/code-editor.png)
   Lá no final vamos ter um comando do git clone, copie esse comando e vá até ao **Code Editor**, é um comando que começa assim
       ```bash
     git clone https://devops.....
     ```
  
-9. E copie o comando no terminal
+1. E copie o comando no terminal
   ![](/images/terminal.png)
 
-10.  Após isso, ele vai pedir o username e password, na tabela abaixo mostra qual será o seu username e password (token criado no _passo 5_)
+1.   Após isso, ele vai pedir o username e password, na tabela abaixo mostra qual será o seu username e password (token criado no _passo 5_)
 
 
 <table>
