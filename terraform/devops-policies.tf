@@ -56,7 +56,7 @@ locals {
   allow_devops_manage_compartment_statements = [
     "Allow dynamic-group ${local.devops_pipln_dg} to manage all-resources in compartment id ${var.compartment_id}",
     //Artifact policies
-    "Allow dynamic-group ${local.devops_pipln_dg} to inspect repos in compartment id ${var.compartment_id}",
+    "Allow dynamic-group ${local.devops_pipln_dg} to manage repos in compartment id ${var.compartment_id}",
     "Allow dynamic-group ${local.devops_pipln_dg} to use repos in compartment id ${var.compartment_id}",
     "Allow dynamic-group ${local.devops_pipln_dg} to inspect generic-artifacts in compartment id ${var.compartment_id}",
     "Allow dynamic-group ${local.devops_pipln_dg} to use generic-artifacts in compartment id ${var.compartment_id}",
@@ -65,6 +65,8 @@ locals {
     "Allow dynamic-group ${local.devops_pipln_dg} to read secret-family in compartment id ${var.compartment_id}",
     "Allow dynamic-group ${local.devops_pipln_dg} to manage devops-family in compartment id ${var.compartment_id}",
     "Allow dynamic-group ${local.devops_pipln_dg} to manage generic-artifacts in compartment id ${var.compartment_id}",
+    "Allow dynamic-group ${local.devops_pipln_dg} to manage devops-family in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to read secret-family in tenancy",
     "Allow dynamic-group ${local.devops_pipln_dg} to use ons-topics in compartment id ${var.compartment_id}"
   ]
 
