@@ -7,5 +7,5 @@ run_image: fnproject/python:3.9
 entrypoint: /python/bin/fdk /function/func.py handler
 memory: 256
 config:
-  queue_id: [queueOCID]
-  service_endpoint: [queueEndpoint]
+  queue_id: "queueOCID"
+  service_endpoint: "queueEndpoint"
