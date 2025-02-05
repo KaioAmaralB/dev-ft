@@ -26,7 +26,7 @@ steps:
       fn build --verbose
       image=$(docker images | grep producer | awk '{print $3}')
       if [ -n "$image" ]; then
-        docker tag $image java-img
+        docker tag $image function-img
       else
         echo "Erro: não foi possível encontrar a imagem do producer"
         exit 1
@@ -45,4 +45,4 @@ outputArtifacts:
     # this is only the locally exported container image name
     # this location tag doesn't effect the tag used to deliver the container image
     # to the Container Registry.
-    location: java-img:latest
+    location: function-img:latest
