@@ -156,7 +156,24 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 
 1. Vamos em **Developer Services** -> **API Gateway** -> **API Gateway FT**
 2. Vamos em **Deployments** -> **Create deployment**
-3. 
+3. Entre com nome de _endpoint_ e o path _/v1_ e de **Next*
+ ![](/images/api01.png)
+
+4. Na parte de autenticação pode deixar no **No Authentication** e dê **Next**
+5. No **Route** coloquei no **Path** _/cliete_ e no **Methods** pode colocar _POST_ e _PUT_
+6. Já no **Backend Type** coloque _Oracle Functions_ e adicione a Functions que criamos, no final vamos ficar assim:
+ ![](/images/api02.png)
+
+7. Após a criação vamos pegar o endpoint no deployment
+   ![](/images/api03.png)
+8. No meu caso ficou, guarde o endpoint pois usaremos para fazer um PUT da uma mensagem em breve
+  ```bash
+    https://nxtjmvbllu7tao5uztmhbhsjc4.apigateway.sa-saopaulo-1.oci.customer-oci.com/v1
+  ```
+Pórem como o nosso route foi o /cliente nosso endpoint ficará assim
+  ```bash
+    https://nxtjmvbllu7tao5uztmhbhsjc4.apigateway.sa-saopaulo-1.oci.customer-oci.com/v1/cliente
+  ```
 
 ## Lab3 - Kubernetes
 

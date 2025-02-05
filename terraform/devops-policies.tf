@@ -6,7 +6,7 @@ resource "oci_identity_dynamic_group" "devops_pipln_dg" {
   name           = "${local.app_name_normalized}-devops-pipln-dg-${random_string.deploy_id.result}"
   description    = "${var.app_name} DevOps Pipeline Dynamic Group"
   compartment_id = var.tenancy_ocid
-  matching_rule  = "ANY {resource.type = 'devopsdeploypipeline', resource.compartment.id = '${var.compartment_id}'}"
+  matching_rule  = join(" ", local.dynamic_group_rules02)
 
   provider = oci.home_region
 
@@ -67,6 +67,10 @@ locals {
     "Allow dynamic-group ${local.devops_pipln_dg} to manage generic-artifacts in compartment id ${var.compartment_id}",
     "Allow dynamic-group ${local.devops_pipln_dg} to manage devops-family in tenancy",
     "Allow dynamic-group ${local.devops_pipln_dg} to read secret-family in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to use virtual-network-family in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to manage public-ips in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to use functions-family in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to manage queues in tenancy",
     "Allow dynamic-group ${local.devops_pipln_dg} to use ons-topics in compartment id ${var.compartment_id}"
   ]
 
@@ -75,6 +79,18 @@ locals {
     "Allow dynamic-group ${local.devops_pipln_dg} to use repos in tenancy",
     "Allow dynamic-group ${local.devops_pipln_dg} to inspect generic-artifacts in tenancy",
     "Allow dynamic-group ${local.devops_pipln_dg} to use generic-artifacts in tenancy",
+  ]
+
+  dynamic_group_rules02 = [
+    "ANY {",
+    "ALL {instance.compartment.id = '${var.compartment_id}'},",
+    "ALL {resource.type = 'cluster', resource.compartment.id = '${var.compartment_id}'},",
+    "ALL {resource.type = 'devopsdeploypipeline', resource.compartment.id = '${var.compartment_id}'},",
+    "ALL {resource.type = 'devopsbuildpipeline', resource.compartment.id = '${var.compartment_id}'},",
+    "ALL {resource.type = 'devopsrepository', resource.compartment.id = '${var.compartment_id}'},",
+    "ALL {resource.type = 'fnfunc', resource.compartment.id = '${var.compartment_id}'},",
+    "ALL {resource.type = 'ApiGateway', resource.compartment.id = '${var.compartment_id}'}",
+    "}"
   ]
 
 }
