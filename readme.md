@@ -40,23 +40,45 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 2. Nessa parte podemos fazer um Mirror de um repo existente, ou podemos criar um do zero. Para facilitar o nosso LAB vamos criar um repositorio no **OCI DevOps** e vamos fazer o git clone então vamos criar o nosso repositorio indo no **Create Repository** e entrando com o nome no **Repository Name**
 
 
-5. Vamos gerar o  **Token de Autenticação** para conseguirmos fazer o git clone e depois o push do código para o reposotorio:
+5. Vamos gerar o  **Token de Autenticação** para conseguirmos fazer o git clone e depois o push do código para o repositorio:
+   **GUARDE O TOKEN POIS ELE NÃO APARECE NOVAMENTE E SERÁ PRECISO RECIRAR UM NOVO**
    1.  Na console no lado direito clique no ícone do boneco e depois vai no nome do seu profile
    ![](/images/user01.png)
    2.  Dentro do seu profile vai em **Auth Tokens** e depois em **Generate token** essa será seu password para se autenticar no repositorio criado
  ![](/images/user02.png)
+<<<<<<< HEAD
 6.  Após gerado o token vamos voltar ao **OCI DevOps** ir em **Code Repositories** entrar no repo que criamos no  _passo 4_ ir em **Details** e descendo a tela ir em **HTTPS** 
      
+=======
+
+
+
+6.  Após gerado o token vamos voltar ao **OCI DevOps** ir em **Code Repositories** entrar no repo que criamos no  _passo 4_ ir em **Details** e descendo a tela ir em **HTTPS** 
+
+  Lá no final vamos ter um comando do git clone, copie esse comando e vá até ao **Code Editor**, é um comando que começa assim
+      ```bash
+    git clone https://devops.....
+    ```
+   
+>>>>>>> 8d4e8202c75a9f7fd6f391e148bf6ea4deb54da6
 7.  Após isso em uma nova abra abra o **Code Editor** 
 ![](/images/code-editor.png)
   Lá no final vamos ter um comando do git clone, copie esse comando e vá até ao **Code Editor**, é um comando que começa assim
       ```bash
     git clone https://devops.....
     ```
+<<<<<<< HEAD
 8. Siga o tutorial na parte de baixo do repositório de código criado.
    ![Repo Clone](/images/git-clone.png)
 9.  Após isso em uma nova abra abra o **Code Editor** 
    ![](/images/code-editor.png)
+=======
+ 
+1. E copie o comando no terminal
+  ![](/images/terminal.png)
+
+1.   Após isso, ele vai pedir o username e password, na tabela abaixo mostra qual será o seu username e password (token criado no _passo 5_)
+>>>>>>> 8d4e8202c75a9f7fd6f391e148bf6ea4deb54da6
 
 10. E copie o comando no terminal
  ![](/images/terminal.png)
