@@ -86,7 +86,6 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 
 ![](/images/unzip.png)
 
-<<<<<<< HEAD
 14. Depois vamos fazer os seguintes comandos para fazer o push para o repositorio
   ```bash
     cd DIRETORIO_CRIADO_REPO
@@ -125,50 +124,11 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
     ```
 
 25. A region key podemos encontrar nesse link: https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm
-=======
-13. Depois vamos fazer os seguintes comandos para fazer o push para o repositorio
-```bash
-cd DIRETORIO_CRIADO_REPO
-git config --global user.email "EMAIL DO SEU USUARIO"
-git add .
-git commit -m "novo commit"
-git push
-#Será preciso se autenticar novamente passando o tenancy/user + token
-```
-1.  Repo irá ficar assim: 
-    ![](/images/devops-repo.png)
-
-2.  Agora vamos criar a nossa pipeline, vamos voltar ao **OCI DevOps** -> **Projects** -> **Build Pipelines** e **Create build pipeline** e vamos dar um nome a nossa pipeline de build e depois ir em **Create**
-    ![](/images/build01.png)
-
-3.  Após a criação vamos adicionar um estágio indo no **Add Stage** , depois vamos dar **Next** e iremos cair nessa tela:
- ![](/images/build02.png)
- ![](/images/build03.png)
-
-1.  Na tela de configuração entre com um nome no **Stage name**, pode deixar as configurações de _Shape_ , _Image_ e _subnet_ padrão, só vamos alterar o **Build_spec file path** que é o caminho até o nosso arquivo de build spec dentro do repositorio onde fizemos o commit e vamos colocar esse caminho:
-```bash
-dev-ft-0.1/build_spec.yaml
-```
-1.  Após isso vamos **Primary code repository** -> **select** -> **OCI Code Repository** seleciona o repositorio criado e clique em **Select**
-2.  Depois só dar **Add** e já temos o nosso primeiro stage onde iremos buildar a nossa função, no próximo passo vamos fazer um push dessa image até o repositorio
-3.  Embaixo no stage criado no passa anterior vá no sinal de **+** e depois em **Add Stage** e depois em **Deliver Artifacts** 
- ![](/images/build04.png)
- ![](/images/build05.png)
-
-1.  Vamos entrar com um nome no **Stage Name** e depois vamos criar um artefato no ***Create Artifact**
-2.  No Artefato vamos colocar um nome e será do tipo **Container image repository** e no **Artifact source: Container registry** temos que entrar no o caminho até o nosso repositorio seguindo o modelo proposto
-```bash
-<region-key>.ocir.io\<tenancy-namespace>\<repo-name>:<tag>
-```
-
-3.  A region key podemos encontrar nesse link: https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm
->>>>>>> 76ca8d2 (Ajustando o readme)
     1.  Ex: Região de São Paulo é gru, Vinhedo é vpc e Ashburn é iad
     2.  Para pegarmos o tenancy namespace vamos até o **profile** boneco no canto da direita e depois em **Tenancy** ira mudar a tela e teremos no **Object storage namespace** o nosso namespace
       ![](/images/namespace.png)
       ![](/images/namespace2.png)
 
-<<<<<<< HEAD
 26. Com essas duas informações e já com o nosso repositorio criado pelo terraform (nome do repo é **function-img**) podemos entrar com as informações, no meu caso ficou assim, basta apenas colocar o namespace de vocês mais o region key (estou usando são paulo)
     ```bash
       [Region-Key].ocir.io\[namespace]\function-img:latest
@@ -177,16 +137,6 @@ dev-ft-0.1/build_spec.yaml
     ![](/images/build06.png)
 
 28. Apoós isso vamos rodar manualmente a nossa esteira para buildar a nossa aplicação e fazer o push no nosso registry
-=======
-4.  Com essas duas informações e já com o nosso repositorio criado pelo terraform (nome do repo é **java-img**) podemos entrar com as informações, no meu caso ficou assim, basta apenas colocar o namespace de vocês mais o region key (estou usando são paulo)
-```bash
-gru.ocir.io\gr3yho6wbbm5\java-img:latest
-```
-5.  Apois isso no **Build config/result artifact name** colocar o **output_fn_network** ficando assim nossa configuração final
-![](/images/build06.png)
-
-1.  Após isso vamos rodar manualmente a nossa esteira para buildar a nossa aplicação e fazer o push no nosso registry
->>>>>>> 76ca8d2 (Ajustando o readme)
    ![](/images/build07.png)
 
 ## Lab2 - Functions, Api Gateway e Queue
