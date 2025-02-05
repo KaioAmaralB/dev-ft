@@ -6,7 +6,6 @@ shell: bash
 env:
   # these are local variables to the build config
   variables:
-    compartment: "ocid1.compartment.oc1..aaaaaaaar2qfdgn75zgiauplengzyg4tywbrfgsfrt3rlctq4c4dckw7proq"
 
   # the value of a vaultVariable is the secret-id (in OCI ID format) stored in the OCI Vault service
   # you can then access the value of that secret in your build_spec.yaml commands
@@ -23,7 +22,7 @@ steps:
     timeoutInSeconds: 1200
     name: "Build Function into container image"
     command: |
-      cd ${OCI_PRIMARY_SOURCE_DIR}/dev-ft-0.1/Functions/producer
+      cd ${OCI_PRIMARY_SOURCE_DIR}/dev-ft-main/Functions/producer
       fn build --verbose
       image=$(docker images | grep producer | awk '{print $3}')
       if [ -n "$image" ]; then
@@ -41,7 +40,7 @@ steps:
         runAs: root
 
 outputArtifacts:
-  - name: output_fn_network
+  - name: function
     type: DOCKER_IMAGE
     # this is only the locally exported container image name
     # this location tag doesn't effect the tag used to deliver the container image

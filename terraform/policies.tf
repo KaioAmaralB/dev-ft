@@ -12,10 +12,10 @@ resource "oci_identity_dynamic_group" "oke_nodes_dg" {
 
 }
 
-resource "oci_identity_policy" "test_policy" {
+resource "oci_identity_policy" "lab_policy" {
   compartment_id = var.compartment_id
   description    = local.policy_description
-  name           = "${local.app_name_normalized}-devops-policy"
+  name           = "${local.app_name_normalized}-policy-lab3"
   statements     = local.oke-policies
   depends_on     = [oci_identity_dynamic_group.oke_nodes_dg]
 

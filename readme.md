@@ -4,8 +4,9 @@
   - [Deploy do Ambiente](#deploy-do-ambiente)
   - [Lab1 - OCI DevOps](#lab1---oci-devops)
   - [Lab2 - Functions, Api Gateway e Queue](#lab2---functions-api-gateway-e-queue)
-  - [Functions](#functions)
-  - [API Gateway](#api-gateway)
+    - [Functions](#functions)
+    - [API Gateway](#api-gateway)
+    - [Enviando Menssagem](#enviando-menssagem)
   - [Lab3 - Kubernetes](#lab3---kubernetes)
     - [Configurar acesso do Cluster no Cloud Shell](#configurar-acesso-do-cluster-no-cloud-shell)
     - [Buscar informações de Serviços necessários](#buscar-informações-de-serviços-necessários)
@@ -44,24 +45,23 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
    ![](/images/user01.png)
    2.  Dentro do seu profile vai em **Auth Tokens** e depois em **Generate token** essa será seu password para se autenticar no repositorio criado
  ![](/images/user02.png)
-
-1.  Após gerado o token vamos voltar ao **OCI DevOps** ir em **Code Repositories** entrar no repo que criamos no  _passo 4_ ir em **Details** e descendo a tela ir em **HTTPS** 
-   
-2.  Após isso em uma nova abra abra o **Code Editor** 
+6.  Após gerado o token vamos voltar ao **OCI DevOps** ir em **Code Repositories** entrar no repo que criamos no  _passo 4_ ir em **Details** e descendo a tela ir em **HTTPS** 
+     
+7.  Após isso em uma nova abra abra o **Code Editor** 
 ![](/images/code-editor.png)
   Lá no final vamos ter um comando do git clone, copie esse comando e vá até ao **Code Editor**, é um comando que começa assim
       ```bash
     git clone https://devops.....
     ```
- 
-1.  Após isso em uma nova abra abra o  **Code Editor** 
-![](/images/code-editor.png)
-1. E copie o comando no terminal
-  ![](/images/terminal.png)
+8. Siga o tutorial na parte de baixo do repositório de código criado.
+   ![Repo Clone](/images/git-clone.png)
+9.  Após isso em uma nova abra abra o **Code Editor** 
+   ![](/images/code-editor.png)
 
-1.  Após isso, ele vai pedir o username e password, na tabela abaixo mostra qual será o seu username e password (token criado no _passo 5_)
+10. E copie o comando no terminal
+ ![](/images/terminal.png)
 
-
+11. Após isso, ele vai pedir o username e password, na tabela abaixo mostra qual será o seu username e password (token criado no _passo 5_
 <table>
   <tr>
     <td>username</td>
@@ -73,71 +73,74 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
   </tr>
 </table>
 
-11. Depois de feito o git clone de maneira correta vamos fazer o upload do arquivo, mas primeiramente vamos fazer o download do mesmo nesse link: https://github.com/ChristoPedro/dev-ft/archive/refs/tags/v0.1.zip
-12.  Vá em **File** e depois em **Upload Files** e faço o upload do arquivo que fez o download **dev-ft-0.1.zip**
-![](/images/code-editor02.png)
-
-
- Rode o seguinte comando para fazer o unzip
+12.   Depois de feito o git clone de maneira correta vamos fazer o download do repositório do Lab utilizando o seguinte comando no code editor
+    
   ```bash
-    unzip dev-ft-0.1.zip -d DIRETORIO REPO
+  wget https://github.com/ChristoPedro/dev-ft/archive/refs/heads/main.zip
+  ```
+13.  Rode o seguinte comando para fazer o unzip
+  ```bash
+    unzip main.zip -d [DIRETORIO REPO]
   ```
 
 ![](/images/unzip.png)
 
-13. Depois vamos fazer os seguintes comandos para fazer o push para o repositorio
+14. Depois vamos fazer os seguintes comandos para fazer o push para o repositorio
   ```bash
     cd DIRETORIO_CRIADO_REPO
     git config --global user.email "EMAIL DO SEU USUARIO"
+    git config --global user.name "SEU USUARIO"
     git add .
     git commit -m "novo commit"
     git push
   ```
-14. Repo irá ficar assim: 
-    ![](/images/devops-repo.png)
+16. Repo irá ficar assim: 
+  ![](/images/devops-repo.png)
 
-15. Agora vamos criar a nossa pipeline, vamos voltar ao **OCI DevOps** -> **Projects** -> **Build Pipelines** e **Create build pipeline** e vamos dar um nome a nossa pipeline de build e depois ir em **Create**
+17. Agora vamos criar a nossa pipeline, vamos voltar ao **OCI DevOps** -> **Projects** -> **Build Pipelines** e **Create build pipeline** e vamos dar um nome a nossa pipeline de build e depois ir em **Create**
     ![](/images/build01.png)
 
-16. Após a criação vamos adicionar um estágio indo no **Add Stage** , depois vamos dar **Next** e iremos cair nessa tela:
- ![](/images/build02.png)
- ![](/images/build03.png)
+18. Após a criação vamos adicionar um estágio indo no **Add Stage** , depois vamos dar **Next** e iremos cair nessa tela:
+    ![](/images/build02.png)
+    ![](/images/build03.png)
 
-17. Na tela de configuração entre com um nome no **Stage name**, pode deixar as configurações de _Shape_ , _Image_ e _subnet_ padrão, só vamos alterar o **Build_spec file path** que é o caminnhioo até o nosso arquivo de build spec dentro do repositorio onde fizemos o commit e vamos colocar esse caminho:
-    ```bash
-        dev-ft-0.1/build_spec.yaml
-    ```
-18. Após isso vamos **Primary code repository** -> **select** -> **OCI Code Repository** seleciona o repositorio criado e clique em **Select**
-19. Depois só dar **Add** e já temos o nosso primeiro stage onde iremos buildar a nossa função, no próximo passa vamos fazer um push dessa image até o repositorio
-20. Embaixo no stage criado no passa anterior vá no sinal de **+** e depois em **Add Stage** e depois em **Deliver Artifacts** 
- ![](/images/build04.png)
- ![](/images/build05.png)
+19. Na tela de configuração entre com os seguites parametros:
+* **Stage Name**: Build_Function
+* **Shape, Image e Subnet**: Default
+*  **Build_spec file path** : dev-ft-main/build_spec.yaml
+  
+20.  Após isso vamos **Primary code repository** -> **select** -> **OCI Code Repository** seleciona o repositorio criado e clique em **Select**
+    ![select code](/images/primary-code.png)
+21. Depois só dar **Add** e já temos o nosso primeiro stage onde iremos buildar a nossa função, no próximo passa vamos fazer um push dessa image até o repositorio
+22. Embaixo no stage criado no passa anterior vá no sinal de **+** e depois em **Add Stage** e depois em **Deliver Artifacts** 
+    ![](/images/build04.png)
+    ![](/images/build05.png)
 
-21. Vamos entrar com um nome no **Stage Name** e depois vamos criar um artefato no ***Create Artifact**
-22. No Artefato vamos colocar um nome e será do tipo **Container image repository** e no **Artifact source: Container registry** temos que entrar no o caminho até o nosso repositorio seguindo o modelo proposto
+23. Vamos preencher o nome do **Stage Name** como delivery_container e depois vamos criar um artefato no **Create Artifact**
+24. No Artefato vamos colocar um nome e será do tipo **Container image repository** e no **Artifact source: Container registry** temos que entrar no o caminho até o nosso repositorio seguindo o modelo proposto
     ```bash
       <region-key>.ocir.io\<tenancy-namespace>\<repo-name>:<tag>
     ```
 
-23. A region key podemos encontrar nesse link: https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm
+25. A region key podemos encontrar nesse link: https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm
     1.  Ex: Região de São Paulo é gru, Vinhedo é vpc e Ashburn é iad
     2.  Para pegarmos o tenancy namespace vamos até o **profile** boneco no canto da direita e depois em **Tenancy** ira mudar a tela e teremos no **Object storage namespace** o nosso namespace
       ![](/images/namespace.png)
       ![](/images/namespace2.png)
 
-24. Com essas duas informações e já com o nosso repositorio criado pelo terraform (nome do repo é **java-img**) podemos entrar com as informações, no meu caso ficou assim, basta apenas colocar o namespace de vocês mais o region key (estou usando são paulo)
+26. Com essas duas informações e já com o nosso repositorio criado pelo terraform (nome do repo é **function-img**) podemos entrar com as informações, no meu caso ficou assim, basta apenas colocar o namespace de vocês mais o region key (estou usando são paulo)
     ```bash
-      gru.ocir.io\gr3yho6wbbm5\java-img:latest
+      [Region-Key].ocir.io\[namespace]\function-img:latest
     ```
-25. Apois isso no **Build config/result artifact name** colocar o **output_fn_network** ficando assim nossa configuração final
-![](/images/build06.png)
+27. Apois isso no **Build config/result artifact name** colocar o **function** ficando assim nossa configuração final
+    ![](/images/build06.png)
 
-26. Apoós isso vamos rodar manualmente a nossa esteira para buildar a nossa aplicação e fazer o push no nosso registry
+28. Apoós isso vamos rodar manualmente a nossa esteira para buildar a nossa aplicação e fazer o push no nosso registry
    ![](/images/build07.png)
 
 ## Lab2 - Functions, Api Gateway e Queue
 
-## Functions
+### Functions
 1. Vamos criar a nossa functions dentro no serviço de **Functions**, assim que a esteira rodar vamos ter uma image dentro do nosso **OCI Registry** , vamos em **Developer Services** -> **Functions** -> **Applications** e vamos entrar no **functionworkshop**
 2. Vamos fazer um create function no modelo de **Create from existing image** conforme as imagens abaixo
  ![](/images/fn01.png)
@@ -152,7 +155,7 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 
 6. Após isso, vamos criar o nosso deployment no **API Gateway**
 
-## API Gateway
+### API Gateway
 
 1. Vamos em **Developer Services** -> **API Gateway** -> **API Gateway FT**
 2. Vamos em **Deployments** -> **Create deployment**
@@ -174,6 +177,16 @@ Pórem como o nosso route foi o /cliente nosso endpoint ficará assim
   ```bash
     https://nxtjmvbllu7tao5uztmhbhsjc4.apigateway.sa-saopaulo-1.oci.customer-oci.com/v1/cliente
   ```
+
+### Enviando Menssagem
+
+Execute o comando abaixo substituindo o endpoint pelo do seu Deployment no Api Gateway
+
+```bash
+curl --location '[Seu Endpoint]' \
+--header 'Content-Type: application/json' \
+--data '{"Teste" : "Lab2"}'
+```
 
 ## Lab3 - Kubernetes
 

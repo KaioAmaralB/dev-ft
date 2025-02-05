@@ -44,7 +44,7 @@ variable "artifact_repository_display_name" {
 }
 
 variable "container_repository_display_name" {
-  default     = "java-img"
+  default     = "function-img"
   description = "Nome do repositório de container"
 }
 

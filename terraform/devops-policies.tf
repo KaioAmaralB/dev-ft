@@ -65,12 +65,6 @@ locals {
     "Allow dynamic-group ${local.devops_pipln_dg} to read secret-family in compartment id ${var.compartment_id}",
     "Allow dynamic-group ${local.devops_pipln_dg} to manage devops-family in compartment id ${var.compartment_id}",
     "Allow dynamic-group ${local.devops_pipln_dg} to manage generic-artifacts in compartment id ${var.compartment_id}",
-    "Allow dynamic-group ${local.devops_pipln_dg} to manage devops-family in tenancy",
-    "Allow dynamic-group ${local.devops_pipln_dg} to read secret-family in tenancy",
-    "Allow dynamic-group ${local.devops_pipln_dg} to use virtual-network-family in tenancy",
-    "Allow dynamic-group ${local.devops_pipln_dg} to manage public-ips in tenancy",
-    "Allow dynamic-group ${local.devops_pipln_dg} to use functions-family in tenancy",
-    "Allow dynamic-group ${local.devops_pipln_dg} to manage queues in tenancy",
     "Allow dynamic-group ${local.devops_pipln_dg} to use ons-topics in compartment id ${var.compartment_id}"
   ]
 
@@ -79,6 +73,12 @@ locals {
     "Allow dynamic-group ${local.devops_pipln_dg} to use repos in tenancy",
     "Allow dynamic-group ${local.devops_pipln_dg} to inspect generic-artifacts in tenancy",
     "Allow dynamic-group ${local.devops_pipln_dg} to use generic-artifacts in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to manage devops-family in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to read secret-family in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to use virtual-network-family in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to manage public-ips in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to use functions-family in tenancy",
+    "Allow dynamic-group ${local.devops_pipln_dg} to manage queues in tenancy",
   ]
 
   dynamic_group_rules02 = [
