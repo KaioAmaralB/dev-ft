@@ -120,7 +120,7 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
       <region-key>.ocir.io/<tenancy-namespace>/<repo-name>:<tag>
     ```
 26. A region key podemos encontrar nesse link: https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm
-    **Ex: Região de São Paulo é gru, Vinhedo é vpc e Ashburn é iad**
+    **Ex: Região de São Paulo é gru, Vinhedo é vcp e Ashburn é iad**
 27. Para pegarmos o tenancy namespace vamos até o **profile** boneco no canto da direita e depois em **Tenancy** ira mudar a tela e teremos no **Object storage namespace** o nosso namespace
   ![](/images/namespace.png)
   ![](/images/namespace2.png)
@@ -138,7 +138,7 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 31. O processo vai iniciar e podemos acompanhar os stages e os logs no lado direito da console.
   ![](/images/build-run1.png)
 32. Após alguns minutos teremos esse resultado abaixo:
-  
+  ![](/images/build-run2.png)
 
 ## Lab2 - Functions, Api Gateway e Queue
 

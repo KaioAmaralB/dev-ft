@@ -26,7 +26,7 @@ steps:
       fn build --verbose
       image=$(docker images | grep producer | awk '{print $3}')
       if [ -n "$image" ]; then
-        docker tag $image function-img
+        docker tag $image function-img:latest
       else
         echo "Erro: não foi possível encontrar a imagem do producer"
         exit 1
