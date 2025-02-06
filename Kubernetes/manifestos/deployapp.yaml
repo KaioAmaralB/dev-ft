@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: queue-reader
-          image: pedrochristo/msg_reader_json-arm64:latest
+          image: pedrochristo/msg_reader_json-amd64
           envFrom:
             - configMapRef:
                 name: reader-configmap
