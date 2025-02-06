@@ -11,6 +11,7 @@
     - [Configurar acesso do Cluster no Cloud Shell](#configurar-acesso-do-cluster-no-cloud-shell)
     - [Buscar informações de Serviços necessários](#buscar-informações-de-serviços-necessários)
     - [Configurar os manifestos e fazer apply no cluster](#configurar-os-manifestos-e-fazer-apply-no-cluster)
+    - [Verificar os dados no banco de dados](#verificar-os-dados-no-banco-de-dados)
 
 ## Deploy do Ambiente
 
@@ -153,6 +154,12 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
   ![](/images/queues.png)
 
 5. Vamos voltar a nossa **Functions** que foi criada no _passo 2_ incluir as seguintes informações no **Configuration** -> **Key/Value** igual na imagem:
+   
+   * **service_endpoint** : queue service endpoint
+   * **queue_id** : queue id
+  
+  > **Após colocar o último valor, lembrece de apertar o botão de + no final do campo value**
+  
    ![](/images/fn03.png)
 
 6. Após isso, vamos criar o nosso deployment no **API Gateway**
@@ -165,7 +172,7 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
  ![](/images/api01.png)
 
 4. Na parte de autenticação pode deixar no **No Authentication** e dê **Next**
-5. No **Route** coloquei no **Path** _/cliete_ e no **Methods** pode colocar _POST_ e _PUT_
+5. No **Route** coloquei no **Path** _/cliente_ e no **Methods** pode colocar _POST_ e _PUT_
 6. Já no **Backend Type** coloque _Oracle Functions_ e adicione a Functions que criamos, no final vamos ficar assim:
  ![](/images/api02.png)
 
@@ -182,12 +189,28 @@ Pórem como o nosso route foi o /cliente nosso endpoint ficará assim
 
 ### Enviando Menssagem
 
-Execute o comando abaixo substituindo o endpoint pelo do seu Deployment no Api Gateway
+Execute o comando abaixo no **Code Editor** substituindo o endpoint pelo do seu Deployment no Api Gateway
 
 ```bash
 curl --location '[Seu Endpoint]' \
 --header 'Content-Type: application/json' \
 --data '{"Teste" : "Lab2"}'
+```
+
+Como o functions ainda está no cold start, pode demorar alguns segundos para retornar uma resposta.
+
+A resposta deve er como o exemplo abaixo.
+
+```bash
+$ curl --location '[Seu Endpoint]' \
+> --header 'Content-Type: application/json' \
+> --data '{"Teste" : "Lab2"}'
+{id ={
+  "messages": [
+    {
+      "expire_after": "2025-02-07T13:28:21.520000+00:00",
+      "id": 148618787707503310
+    }
 ```
 
 ## Lab3 - Kubernetes
@@ -200,7 +223,11 @@ curl --location '[Seu Endpoint]' \
 3. Clique no cluster criado no resource manager e selecione **Access Cluster**
 ![Acess Cluster](/images/oke-acess.png)
 4. Siga o Passo-a-Passo do Pop-up
-![Tutorial](/images/oke-acess-2.png)
+   
+   > Para realizar o lab em vez de utilizar o Cloud Shell utilize o **Code Editor**. Vai facilitar para editar os arquivos necessários.
+
+   ![Tutorial](/images/oke-acess-2.png)
+
 5. Para testar o acesso o cluster, executar o código abaixo.
 
 ```bash
@@ -227,7 +254,7 @@ NAME          STATUS   ROLES   AGE     VERSION
 6. Copie da Conole o OCID da Fila e o Endpoint
 ![Queue Info](/images/queue-info.png)
 7. **Scret**, navegue no menu hamburger **Identity and Security -> Vault**
-![Vault Manu](/images/vault-menu.png)
+![Vault Menu](/images/vault-menu.png)
 8. Clique no vault criado pelo Resource Manager
 9.  No lado esquerdo selecione Secrets
 10. Copie o OCID do Secret criado pelo Resource Manager
@@ -235,7 +262,7 @@ NAME          STATUS   ROLES   AGE     VERSION
 
 ### Configurar os manifestos e fazer apply no cluster
 
-1. Criar uma nova pasta no Cloud Shell e acessar a pasta
+1. Criar uma nova pasta no Code Editor e acessar a pasta
 
 ```bash
 mkdir app
@@ -249,13 +276,15 @@ wget https://github.com/ChristoPedro/dev-ft/releases/download/v0.1/deployapp.yam
 ```
 3. Fazer Update do Config Map para passar as informações do Banco e do Queue
 
+![](/images/config-map.png)
+
 - **SERVICE_ENDPOINT:** Endpoint do serviço de Queue
 - **QUEUE_ID:** Queue OCID
 - **SECRET_ID:** Com a senha do Autonomous Json
 - **AUTONOMOUS:** String do Autonomous Json
 - **USER:** Admin
 
-4. Fazer o apply do arquivo do Config Map com o comando:
+1. Fazer o apply do arquivo do Config Map com o comando:
 
 ```bash
 kubectl apply -f config-maps.yaml
@@ -274,3 +303,27 @@ kubectl get pods
 NAME                            READY   STATUS    RESTARTS   AGE
 queue-reader-5b965f75bc-8p7fw   1/1     Running   0          3m27s
 ```
+
+7. Conferir se o programa está rodando corretamente
+
+```bash
+kubectl logs [nome do seu pod]
+```
+
+```bash
+$ kubectl logs queue-reader-5b965f75bc-skkjk
+2025-02-06 13:52:49,416 - INFO - Collection 'devopsft' has been created.
+2025-02-06 13:52:49,659 - INFO - Dados Inseridos
+2025-02-06 13:52:49,684 - INFO - Dados Inseridos
+2025-02-06 13:52:49,697 - INFO - Dados Inseridos
+```
+
+### Verificar os dados no banco de dados
+
+1. Navegue até **Oracle Database > Autonomous JSON Database > Clique no Database criado ateriormente**
+2. Cliquem em Database Actions e selecione SQL
+   ![](/images/adj1.png)
+3. Uma nova abra vai abrir automaticamente, nessa nova aba navegue no menu hamburger e selecione JSON
+   ![](/images/adj2.png)
+4. Selecionando a Collection **devopsft** é possivel ver todos os dados enviados no lab anterior.
+   ![](/images/adj3.png)
