@@ -31,38 +31,33 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 
 ## Lab1 - OCI DevOps
 
-1. Após a criação do projeto feito pelo **Resource Manager**, vamos começara criar a nossa esteira. Vamos em **Developer Services** 
-2. Depois em  **Projects** 
-![](/images/devops-project.png)
+1. Após a criação do projeto feito pelo **Resource Manager**, vamos começara criar a nossa esteira. Vamos em **Developer Services > DevOps > Projects** 
+   ![menu devops](/images/menu-devops.png)
+2. Depois em  **Projects** selecione o projeto criado pelo Resrouce Manager anteriormente
+   ![](/images/devops-project.png)
   
-1. Ao entrar no nosso projeto da esteira vamos em **Code Repositories** 
+3. Ao entrar no nosso projeto da esteira vamos em **Code Repositories** 
    
-2. Nessa parte podemos fazer um Mirror de um repo existente, ou podemos criar um do zero. Para facilitar o nosso LAB vamos criar um repositorio no **OCI DevOps** e vamos fazer o git clone então vamos criar o nosso repositorio indo no **Create Repository** e entrando com o nome no **Repository Name**
-
-
-5. Vamos gerar o  **Token de Autenticação** para conseguirmos fazer o git clone e depois o push do código para o repositorio:
+4. Nessa parte podemos fazer um Mirror de um repo existente, ou podemos criar um do zero. Para facilitar o nosso LAB vamos criar um repositorio no **OCI DevOps** e vamos fazer o git clone então vamos criar o nosso repositorio clicando em **Create Repository**
+   
+   ![create repository](/images/create-repository.png)
+5. Na tela seguinte coloque um nome da sua escolha no repositório e clique em create.
+6. Esse Repositório é baseado em GIT e precisa de autenticação para ser utilizado em ambientes remotos.
+7. Vamos gerar o **Token de Autenticação** para conseguirmos fazer o git clone e depois o push do código para o repositorio:
    **GUARDE O TOKEN POIS ELE NÃO APARECE NOVAMENTE E SERÁ PRECISO RECIRAR UM NOVO**
    1.  Na console no lado direito clique no ícone do boneco e depois vai no nome do seu profile
    ![](/images/user01.png)
    2.  Dentro do seu profile vai em **Auth Tokens** e depois em **Generate token** essa será seu password para se autenticar no repositorio criado
  ![](/images/user02.png)
-6.  Após gerado o token vamos voltar ao **OCI DevOps** ir em **Code Repositories** entrar no repo que criamos no  _passo 4_ ir em **Details** e descendo a tela ir em **HTTPS** 
-     
-7.  Após isso em uma nova abra abra o **Code Editor** 
-![](/images/code-editor.png)
-  Lá no final vamos ter um comando do git clone, copie esse comando e vá até ao **Code Editor**, é um comando que começa assim
-      ```bash
-    git clone https://devops.....
-    ```
-8. Siga o tutorial na parte de baixo do repositório de código criado.
-   ![Repo Clone](/images/git-clone.png)
+8.  Após gerado o token vamos voltar ao **OCI DevOps** ir em **Code Repositories** entrar no repo que criamos no  _passo 4_ ir em **Details** e descendo a tela ir em **HTTPS** 
+  ![Repo Clone](/images/git-clone.png)
 9.  Após isso em uma nova abra abra o **Code Editor** 
-   ![](/images/code-editor.png)
+10. ![](/images/code-editor.png)
 
-10. E copie o comando no terminal
- ![](/images/terminal.png)
+11. E copie o comando no terminal
+    ![](/images/terminal.png)
 
-11. Após isso, ele vai pedir o username e password, na tabela abaixo mostra qual será o seu username e password (token criado no _passo 5_
+12. Após isso, ele vai pedir o username e password, na parte de cima do Code Editor. Na tabela abaixo mostra qual como montar o seu username e password (token criado no _passo 5_)
 <table>
   <tr>
     <td>username</td>
@@ -74,19 +69,19 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
   </tr>
 </table>
 
-12.   Depois de feito o git clone de maneira correta vamos fazer o download do repositório do Lab utilizando o seguinte comando no code editor
+13. Depois de feito o git clone de maneira correta vamos fazer o download do repositório do Lab utilizando o seguinte comando no code editor
     
   ```bash
   wget https://github.com/ChristoPedro/dev-ft/archive/refs/heads/main.zip
   ```
-13.  Rode o seguinte comando para fazer o unzip
+14.  Rode o seguinte comando para fazer o unzip
   ```bash
     unzip main.zip -d [DIRETORIO REPO]
   ```
 
 ![](/images/unzip.png)
 
-14. Depois vamos fazer os seguintes comandos para fazer o push para o repositorio
+15. Depois vamos fazer os seguintes comandos para fazer o push para o repositorio
   ```bash
     cd DIRETORIO_CRIADO_REPO
     git config --global user.email "EMAIL DO SEU USUARIO"
@@ -95,49 +90,55 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
     git commit -m "novo commit"
     git push
   ```
-16. Repo irá ficar assim: 
-  ![](/images/devops-repo.png)
+16. Mais uma vez será necessário entrar com as informações de usuário e senha, os memos utilizados no Git Clone.
+    
+17. Repo irá ficar assim: 
+    ![](/images/devops-repo.png)
 
-17. Agora vamos criar a nossa pipeline, vamos voltar ao **OCI DevOps** -> **Projects** -> **Build Pipelines** e **Create build pipeline** e vamos dar um nome a nossa pipeline de build e depois ir em **Create**
+18. Agora vamos criar a nossa pipeline, vamos voltar ao **OCI DevOps** -> **Projects** -> **Build Pipelines** e **Create build pipeline** e vamos dar um nome a nossa pipeline de build e depois ir em **Create**
     ![](/images/build01.png)
 
-18. Após a criação vamos adicionar um estágio indo no **Add Stage** , depois vamos dar **Next** e iremos cair nessa tela:
+19. Após a criação vamos adicionar um estágio indo no **Add Stage** , depois vamos dar **Next** e iremos cair nessa tela:
     ![](/images/build02.png)
     ![](/images/build03.png)
 
-19. Na tela de configuração entre com os seguites parametros:
+20. Na tela de configuração entre com os seguites parametros:
 * **Stage Name**: Build_Function
 * **Shape, Image e Subnet**: Default
 *  **Build_spec file path** : dev-ft-main/build_spec.yaml
   
-20.  Após isso vamos **Primary code repository** -> **select** -> **OCI Code Repository** seleciona o repositorio criado e clique em **Select**
+21.    Após isso vamos **Primary code repository** -> **select** -> **OCI Code Repository** seleciona o repositorio criado e clique em **Select**
     ![select code](/images/primary-code.png)
-21. Depois só dar **Add** e já temos o nosso primeiro stage onde iremos buildar a nossa função, no próximo passa vamos fazer um push dessa image até o repositorio
-22. Embaixo no stage criado no passa anterior vá no sinal de **+** e depois em **Add Stage** e depois em **Deliver Artifacts** 
+22. Depois só dar **Add** e já temos o nosso primeiro stage onde iremos buildar a nossa função, no próximo passa vamos fazer um push dessa image até o repositorio
+23. Embaixo no stage criado no passa anterior vá no sinal de **+** e depois em **Add Stage** e depois em **Deliver Artifacts** 
     ![](/images/build04.png)
     ![](/images/build05.png)
 
-23. Vamos preencher o nome do **Stage Name** como delivery_container e depois vamos criar um artefato no **Create Artifact**
-24. No Artefato vamos colocar um nome e será do tipo **Container image repository** e no **Artifact source: Container registry** temos que entrar no o caminho até o nosso repositorio seguindo o modelo proposto
+24. Vamos preencher o nome do **Stage Name** como **delivery_container** e depois vamos criar um artefato novo clicando em **Create Artifact**.
+25. No Artefato vamos colocar o nome **Container** ele será do tipo **Container image repository** e no **Artifact source: Container registry** temos que entrar no o caminho do o nosso repositorio seguindo o modelo proposto
     ```bash
-      <region-key>.ocir.io\<tenancy-namespace>\<repo-name>:<tag>
+      <region-key>.ocir.io/<tenancy-namespace>/<repo-name>:<tag>
     ```
+26. A region key podemos encontrar nesse link: https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm
+    **Ex: Região de São Paulo é gru, Vinhedo é vpc e Ashburn é iad**
+27. Para pegarmos o tenancy namespace vamos até o **profile** boneco no canto da direita e depois em **Tenancy** ira mudar a tela e teremos no **Object storage namespace** o nosso namespace
+  ![](/images/namespace.png)
+  ![](/images/namespace2.png)
 
-25. A region key podemos encontrar nesse link: https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm
-    1.  Ex: Região de São Paulo é gru, Vinhedo é vpc e Ashburn é iad
-    2.  Para pegarmos o tenancy namespace vamos até o **profile** boneco no canto da direita e depois em **Tenancy** ira mudar a tela e teremos no **Object storage namespace** o nosso namespace
-      ![](/images/namespace.png)
-      ![](/images/namespace2.png)
-
-26. Com essas duas informações e já com o nosso repositorio criado pelo terraform (nome do repo é **function-img**) podemos entrar com as informações, no meu caso ficou assim, basta apenas colocar o namespace de vocês mais o region key (estou usando são paulo)
+28.  Com essas duas informações e já com o nosso repositorio criado pelo terraform (nome do repo é **function-img**) podemos entrar com as informações, no meu caso ficou assim, basta apenas colocar o namespace de vocês mais o region key (estou usando são paulo)
     ```bash
-      [Region-Key].ocir.io\[namespace]\function-img:latest
+      [Region-Key].ocir.io/[namespace]/function-img:latest
     ```
-27. Apois isso no **Build config/result artifact name** colocar o **function** ficando assim nossa configuração final
-    ![](/images/build06.png)
+29.  Apois isso no **Build config/result artifact name** colocar o **function** ficando assim nossa configuração final
+  ![](/images/build06.png)
 
-28. Apoós isso vamos rodar manualmente a nossa esteira para buildar a nossa aplicação e fazer o push no nosso registry
+30. Apoós isso vamos rodar manualmente a nossa esteira para buildar a nossa aplicação e fazer o push no nosso registry
    ![](/images/build07.png)
+   ![](/images/start-manual-run2.png)
+31. O processo vai iniciar e podemos acompanhar os stages e os logs no lado direito da console.
+  ![](/images/build-run1.png)
+32. Após alguns minutos teremos esse resultado abaixo:
+  
 
 ## Lab2 - Functions, Api Gateway e Queue
 
