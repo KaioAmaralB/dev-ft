@@ -1,5 +1,9 @@
 # DevOps FastTrack - Labs
 
+O Objectivo desse lab é montar uma aplicação com comunicação assíncrona utilizando OCI QUEUE. A aplicação vai armazenar os dados enviados via API Gateway em um banco de dados Autonomous Json utilizando as API de MongoDB.
+
+![App](/images/applicacao.png)
+
 - [DevOps FastTrack - Labs](#devops-fasttrack---labs)
   - [Deploy do Ambiente](#deploy-do-ambiente)
   - [Lab1 - OCI DevOps](#lab1---oci-devops)
