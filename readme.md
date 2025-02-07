@@ -50,19 +50,22 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 6. Esse Repositório é baseado em GIT e precisa de autenticação para ser utilizado em ambientes remotos.
 7. Vamos gerar o **Token de Autenticação** para conseguirmos fazer o git clone e depois o push do código para o repositorio:
    **GUARDE O TOKEN POIS ELE NÃO APARECE NOVAMENTE E SERÁ PRECISO RECIRAR UM NOVO**
-   1.  Na console no lado direito clique no ícone do boneco e depois vai no nome do seu profile
+   1.  Na console no lado direito clique no ícone do perfil e depois vai no nome do seu profile
    ![](/images/user01.png)
    2.  Dentro do seu profile vai em **Auth Tokens** e depois em **Generate token** essa será seu password para se autenticar no repositorio criado
  ![](/images/user02.png)
-8.  Após gerado o token vamos voltar ao **OCI DevOps** ir em **Code Repositories** entrar no repo que criamos no  _passo 4_ ir em **Details** e descendo a tela ir em **HTTPS** 
+9. Vamos precisar também do Tenancy Name e do nome do seu usuário. 
+    1. Na console no lado direito clique no ícone do perfil. E pegue as informações da imagem abaixo.
+    ![](/images/tenancyName.png)
+10. Após gerado o token e pegar as informações de tenancy Name e usuário vamos voltar ao **OCI DevOps** ir em **Code Repositories** entrar no repo que criamos no  _passo 4_ ir em **Details** e descendo a tela ir em **HTTPS** 
   ![Repo Clone](/images/git-clone.png)
-9.  Após isso em uma nova abra abra o **Code Editor** 
-10. ![](/images/code-editor.png)
+1.  Após isso em uma nova abra abra o **Code Editor** 
+2.  ![](/images/code-editor.png)
 
-11. E copie o comando no terminal
+3.  E copie o comando no terminal
     ![](/images/terminal.png)
 
-12. Após isso, ele vai pedir o username e password, na parte de cima do Code Editor. Na tabela abaixo mostra qual como montar o seu username e password (token criado no _passo 5_)
+4.  Após isso, ele vai pedir o username e password, na parte de cima do Code Editor. Na tabela abaixo mostra qual como montar o seu username e password (token criado no _passo 5_)
 <table>
   <tr>
     <td>username</td>
@@ -74,7 +77,7 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
   </tr>
 </table>
 
-13. Depois de feito o git clone de maneira correta vamos fazer o download do repositório do Lab utilizando o seguinte comando no code editor
+1.  Depois de feito o git clone de maneira correta vamos fazer o download do repositório do Lab utilizando o seguinte comando no code editor
     
   ```bash
   wget https://github.com/ChristoPedro/dev-ft/archive/refs/heads/main.zip
@@ -105,12 +108,12 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 
 19. Após a criação vamos adicionar um estágio indo no **Add Stage** , depois vamos dar **Next** e iremos cair nessa tela:
     ![](/images/build02.png)
-    ![](/images/build03.png)
 
 20. Na tela de configuração entre com os seguites parametros:
 * **Stage Name**: Build_Function
 * **Shape, Image e Subnet**: Default
 *  **Build_spec file path** : dev-ft-main/build_spec.yaml
+![](/images/build03.png)  
   
 21.    Após isso vamos **Primary code repository** -> **select** -> **OCI Code Repository** seleciona o repositorio criado e clique em **Select**
     ![select code](/images/primary-code.png)
@@ -120,11 +123,13 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
     ![](/images/build05.png)
 
 24. Vamos preencher o nome do **Stage Name** como **delivery_container** e depois vamos criar um artefato novo clicando em **Create Artifact**.
+   ![](/images/delivery-1.png)
 25. No Artefato vamos colocar o nome **Container** ele será do tipo **Container image repository** e no **Artifact source: Container registry** temos que entrar no o caminho do o nosso repositorio.
 26. Execute o comando abaixo no **Code Editor** para gerar o caminho completo do repositório.
     ```bash
       echo "$(oci iam region-subscription list --query "data[?\"is-home-region\"].\"region-key\" | [0]" --raw-output | tr '[:upper:]' '[:lower:]').ocir.io/$(oci os ns get --query "data" --raw-output)/function-img:latest"
     ```
+  ![](/images/delivery-2.png)
 27.  Apois isso no **Build config/result artifact name** colocar o **function** ficando assim nossa configuração final
   ![](/images/build06.png)
 
@@ -219,7 +224,7 @@ $ curl --location '[Seu Endpoint]' \
 ![Acess Cluster](/images/oke-acess.png)
 4. Siga o Passo-a-Passo do Pop-up
    
-   > Para realizar o lab em vez de utilizar o Cloud Shell utilize o **Code Editor**. Vai facilitar para editar os arquivos necessários.
+   > :warning: Para realizar o lab em vez de utilizar o Cloud Shell utilize o **Code Editor**. Vai facilitar para editar os arquivos necessários.
 
    ![Tutorial](/images/oke-acess-2.png)
 
