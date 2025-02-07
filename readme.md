@@ -120,29 +120,20 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
     ![](/images/build05.png)
 
 24. Vamos preencher o nome do **Stage Name** como **delivery_container** e depois vamos criar um artefato novo clicando em **Create Artifact**.
-25. No Artefato vamos colocar o nome **Container** ele será do tipo **Container image repository** e no **Artifact source: Container registry** temos que entrar no o caminho do o nosso repositorio seguindo o modelo proposto
+25. No Artefato vamos colocar o nome **Container** ele será do tipo **Container image repository** e no **Artifact source: Container registry** temos que entrar no o caminho do o nosso repositorio.
+26. Execute o comando abaixo no **Code Editor** para gerar o caminho completo do repositório.
     ```bash
-      <region-key>.ocir.io/<tenancy-namespace>/<repo-name>:<tag>
+      echo "$(oci iam region-subscription list --query "data[?\"is-home-region\"].\"region-key\" | [0]" --raw-output | tr '[:upper:]' '[:lower:]').ocir.io/$(oci os ns get --query "data" --raw-output)/function-img:latest"
     ```
-26. A region key podemos encontrar nesse link: https://docs.oracle.com/en-us/iaas/Content/General/Concepts/regions.htm
-    **Ex: Região de São Paulo é gru, Vinhedo é vcp e Ashburn é iad**
-27. Para pegarmos o tenancy namespace vamos até o **profile** boneco no canto da direita e depois em **Tenancy** ira mudar a tela e teremos no **Object storage namespace** o nosso namespace
-  ![](/images/namespace.png)
-  ![](/images/namespace2.png)
-
-28.  Com essas duas informações e já com o nosso repositorio criado pelo terraform (nome do repo é **function-img**) podemos entrar com as informações, no meu caso ficou assim, basta apenas colocar o namespace de vocês mais o region key (estou usando são paulo)
-    ```bash
-      [Region-Key].ocir.io/[namespace]/function-img:latest
-    ```
-29.  Apois isso no **Build config/result artifact name** colocar o **function** ficando assim nossa configuração final
+27.  Apois isso no **Build config/result artifact name** colocar o **function** ficando assim nossa configuração final
   ![](/images/build06.png)
 
-30. Apoós isso vamos rodar manualmente a nossa esteira para buildar a nossa aplicação e fazer o push no nosso registry
+1.  Apoós isso vamos rodar manualmente a nossa esteira para buildar a nossa aplicação e fazer o push no nosso registry
    ![](/images/build07.png)
    ![](/images/start-manual-run2.png)
-31. O processo vai iniciar e podemos acompanhar os stages e os logs no lado direito da console.
+2.  O processo vai iniciar e podemos acompanhar os stages e os logs no lado direito da console.
   ![](/images/build-run1.png)
-32. Após alguns minutos teremos esse resultado abaixo:
+1.  Após alguns minutos teremos esse resultado abaixo:
   ![](/images/build-run2.png)
 
 ## Lab2 - Functions, Api Gateway e Queue

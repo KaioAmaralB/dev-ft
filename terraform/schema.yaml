@@ -305,6 +305,9 @@ variables:
           - eq:
             - node_pool_shape 
             - "VM.Standard.A1.Flex"
+          - eq:
+            - node_pool_shape 
+            - "VM.Standard.A2.Flex"
 
   node_pool_node_shape_config_memory_in_gbs:
     type: integer
@@ -318,6 +321,9 @@ variables:
         - or:
           - eq:
             - node_pool_shape 
+            - "VM.Standard.E5.Flex"
+          - eq:
+            - node_pool_shape 
             - "VM.Standard.E3.Flex"
           - eq:
             - node_pool_shape 
@@ -325,6 +331,9 @@ variables:
           - eq:
             - node_pool_shape 
             - "VM.Standard.A1.Flex"
+          - eq:
+            - node_pool_shape 
+            - "VM.Standard.A2.Flex"
 
   node_pool_name:
     type: string
