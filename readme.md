@@ -175,10 +175,12 @@ O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço d
 5. No **Route** coloquei no **Path** _/cliente_ e no **Methods** pode colocar _POST_ e _PUT_
 6. Já no **Backend Type** coloque _Oracle Functions_ e adicione a Functions que criamos, no final vamos ficar assim:
  ![](/images/api02.png)
+ "[](/images/api0201.png)
 
 7. Após a criação vamos pegar o endpoint no deployment
+8. Entre No deployment criado
    ![](/images/api03.png)
-8. No meu caso ficou, guarde o endpoint pois usaremos para fazer um PUT da uma mensagem em breve
+9. No meu caso ficou, guarde o endpoint pois usaremos para fazer um PUT da uma mensagem em breve
   ```bash
     https://nxtjmvbllu7tao5uztmhbhsjc4.apigateway.sa-saopaulo-1.oci.customer-oci.com/v1
   ```
