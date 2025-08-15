@@ -21,7 +21,7 @@ O Objectivo desse lab é montar uma aplicação com comunicação assíncrona ut
 
 O ambiente vai ser todo provisionado via Terraform, vamos utilizar um serviço do OCI chamado **Resource Manager**.
 
-1. Faça o download do código em zip [aqui](https://github.com/ChristoPedro/dev-ft/releases/download/v0.1/terraform.zip)
+1. Faça o download do código em zip [aqui](https://github.com/KaioAmaralB/dev-ft/releases/download/v0.2/terraform.zip)
 2. Na console do OCI navegue no menu hamburger em **Developer Services -> Resource Manager -> Stacks**
 ![Resource Manager](/images/resource-manager-menu.png)
 3. Clique em **Create New Stack**
