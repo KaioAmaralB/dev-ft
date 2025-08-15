@@ -1,3 +1,0 @@
-# terraform-dev
-
-Download terraform.
